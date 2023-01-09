@@ -32,6 +32,15 @@
         Condition="'$(GitBranch)' == ''">
         <Output TaskParameter="ConsoleOutput" PropertyName="GitBranch" />
     </Exec>
+    <Exec
+	    Command="git status --porcelain"
+	    WorkingDirectory="$(MSBuildProjectDirectory)"
+	    ConsoleToMSBuild="true"
+	    IgnoreExitCode="true"
+	    StandardOutputImportance="low"
+	    Condition="'$(GitDirtyFiles)' == ''">
+	    <Output TaskParameter="ConsoleOutput" PropertyName="GitDirtyFiles" />
+    </Exec>
     <WriteLinesToFile
         File="$(IntermediateOutputPath)\git_head.txt"
         Lines="$(GitHead)"
@@ -68,6 +77,18 @@
         Condition="'$(GitBranch)' == ''"
         Overwrite="true"
         WriteOnlyWhenDifferent="true" />
+    <WriteLinesToFile
+	    File="$(IntermediateOutputPath)\git_dirty.txt"
+	    Lines="$(GitDirtyFiles)"
+	    Condition="'$(GitDirtyFiles)' != ''"
+	    Overwrite="true"
+	    WriteOnlyWhenDifferent="true" />
+    <WriteLinesToFile
+	    File="$(IntermediateOutputPath)\git_dirty.txt"
+	    Lines="Not a git clone or git is not in Path."
+	    Condition="'$(GitDirtyFiles)' == ''"
+	    Overwrite="true"
+	    WriteOnlyWhenDifferent="true" />
   </Target>
 
   <ItemGroup>
@@ -86,6 +107,7 @@
     <AdditionalFiles Include="$(IntermediateOutputPath)\git_head.txt" />
     <AdditionalFiles Include="$(IntermediateOutputPath)\git_commit_hash.txt" />
     <AdditionalFiles Include="$(IntermediateOutputPath)\git_branch.txt" />
+    <AdditionalFiles Include="$(IntermediateOutputPath)\git_dirty.txt" />
   </ItemGroup>
 
 </Project>

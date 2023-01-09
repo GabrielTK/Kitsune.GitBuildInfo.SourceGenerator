@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>true</IsPackable>
-    <Version>1.0.17</Version>
+    <Version>1.0.18</Version>
     <PackageReleaseNotes>Fixed issue where the roslyn dependencies gets placed in the nuget package.</PackageReleaseNotes>
     <Copyright>Copyright (c) 2021-2022</Copyright>
     <!-- Suppresses the warnings about the package not having assemblies in lib/*/.dll.-->

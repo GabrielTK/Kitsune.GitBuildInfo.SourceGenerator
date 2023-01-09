@@ -7,4 +7,5 @@ internal class GitInfo
     public string CommitHash { get; set; }
 
     public string GitBranch { get; set; }
+    public string[] GitDiff { get; set; }
 }

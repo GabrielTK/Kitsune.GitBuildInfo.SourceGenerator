@@ -34,6 +34,7 @@ public class SourceGenerator : ISourceGenerator
         var gitHead = context.AdditionalFiles.First(text => text.Path.EndsWith("git_head.txt")).GetText()?.ToString();
         var commitHash = context.AdditionalFiles.First(text => text.Path.EndsWith("git_commit_hash.txt")).GetText()?.ToString();
         var gitBranch = context.AdditionalFiles.First(text => text.Path.EndsWith("git_branch.txt")).GetText()?.ToString();
+        var gitDiff = context.AdditionalFiles.First(text => text.Path.EndsWith("git_dirty.txt")).GetText()?.ToString();
 
         var code = Generator.CreateAndGenerateCode(
             new GeneratorOptions
@@ -47,6 +48,7 @@ public class SourceGenerator : ISourceGenerator
                 GitHead = gitHead!.Trim(Environment.NewLine.ToCharArray()),
                 CommitHash = commitHash!.Trim(Environment.NewLine.ToCharArray()),
                 GitBranch = gitBranch!.Trim(Environment.NewLine.ToCharArray()),
+                GitDiff = gitDiff!.Trim(Environment.NewLine.ToCharArray()).Split(Environment.NewLine.ToCharArray()).Where(x=>!string.IsNullOrEmpty(x)).ToArray(),
             },
             context);
 

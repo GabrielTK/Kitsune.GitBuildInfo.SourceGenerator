@@ -85,6 +85,11 @@ namespace {options.RootNamespace}
         /// A value indicating whether refs point to a stable tag release.
         /// </value>
         public static bool IsTag => Headdesc.StartsWith(""tags/"", StringComparison.Ordinal);
+
+        /// <summary>
+        /// Dirty files, as shown by ""git status~"".
+        /// </summary>
+        public static string[] DirtyFiles {{ get; }} = new string[] {{ {String.Join(",", gitInfo.GitDiff.Select(mod => "\"" + mod + "\""))} }};
     }}
 }}
 
