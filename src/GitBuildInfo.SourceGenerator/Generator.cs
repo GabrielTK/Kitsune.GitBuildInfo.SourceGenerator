@@ -24,7 +24,7 @@ namespace {options.RootNamespace}
 {{
     internal class {options.ClassName}
     {{
-        public string Headdesc {{ get; }} = ""{gitInfo.GitHead}"";
+        public static string Headdesc {{ get; }} = ""{gitInfo.GitHead}"";
 
         /// <summary>
         /// Gets the git commit hash as formatted by git rev-parse.
@@ -32,7 +32,7 @@ namespace {options.RootNamespace}
         /// <value>
         /// The git commit hash as formatted by git rev-parse.
         /// </value>
-        public string Commit {{ get; }} = ""{gitInfo.CommitHash}"";
+        public static string Commit {{ get; }} = ""{gitInfo.CommitHash}"";
 
         /// <summary>
         /// Gets the git branch name as formatted by git name-rev.
@@ -40,7 +40,7 @@ namespace {options.RootNamespace}
         /// <value>
         /// The git branch name as formatted by git name-rev.
         /// </value>
-        public string Branchname {{ get; }} = ""{gitInfo.GitBranch}"";
+        public static string Branchname {{ get; }} = ""{gitInfo.GitBranch}"";
 
         /// <summary>
         /// Gets a value indicating whether the branch is dirty or
@@ -50,7 +50,7 @@ namespace {options.RootNamespace}
         /// A value indicating whether the branch is dirty or
         /// clean based upon the string constructed by git describe.
         /// </value>
-        public bool IsDirty => this.Headdesc.EndsWith(""-dirty"", StringComparison.Ordinal);
+        public static bool IsDirty => Headdesc.EndsWith(""-dirty"", StringComparison.Ordinal);
 
         /// <summary>
         /// Gets a value indicating whether the branch is the master
@@ -64,7 +64,7 @@ namespace {options.RootNamespace}
         /// </value>
         [Obsolete(""Use GitInformation.IsMain instead. This will be removed in a future release. This is because most people using git are abandoning the use of master as the default branch name for the name of main. To prevent breakage I suggest you rename your default branch from master to main today."")]
         [ExcludeFromCodeCoverage]
-        public bool IsMaster => this.Branchname.Equals(""master"", StringComparison.Ordinal) || this.IsMain;
+        public static bool IsMaster => Branchname.Equals(""master"", StringComparison.Ordinal) || IsMain;
 
         /// <summary>
         /// Gets a value indicating whether the branch is the main
@@ -76,7 +76,7 @@ namespace {options.RootNamespace}
         /// branch or not based upon the string constructed by
         /// git name-rev.
         /// </value>
-        public bool IsMain => this.Branchname.Equals(""main"", StringComparison.Ordinal);
+        public static bool IsMain => Branchname.Equals(""main"", StringComparison.Ordinal);
 
         /// <summary>
         /// Gets a value indicating whether refs point to a stable tag release.
@@ -84,7 +84,7 @@ namespace {options.RootNamespace}
         /// <value>
         /// A value indicating whether refs point to a stable tag release.
         /// </value>
-        public bool IsTag => this.Headdesc.StartsWith(""tags/"", StringComparison.Ordinal);
+        public static bool IsTag => Headdesc.StartsWith(""tags/"", StringComparison.Ordinal);
     }}
 }}
 
