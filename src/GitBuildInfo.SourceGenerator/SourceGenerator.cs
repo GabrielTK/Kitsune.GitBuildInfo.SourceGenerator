@@ -1,4 +1,6 @@
-﻿namespace GitBuildInfo.SourceGenerator;
+﻿using System.Diagnostics;
+
+namespace GitBuildInfo.SourceGenerator;
 
 /// <summary>
 /// Source Generator for dumping git build information into a assembly level attribute on the compilation.
@@ -10,6 +12,12 @@ public class SourceGenerator : ISourceGenerator
     public void Initialize(GeneratorInitializationContext context)
     {
         // Source Generators do not need to fill this in.
+#if DEBUG
+            if (!Debugger.IsAttached)
+            {
+                Debugger.Launch();
+            }
+#endif
     }
 
     /// <inheritdoc/>
@@ -21,31 +29,31 @@ public class SourceGenerator : ISourceGenerator
         }
 
         _ = context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property.RootNamespace", out var rootNamespace);
-        _ = context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property.GitBuildInfoAssemblyType", out var assemblyType);
-        _ = context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property.GitBuildInfoIsGeneric", out var isGeneric);
+        _ = context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property.GitBuildInfoClassName", out var className);
+        //_ = context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property.GitBuildInfoIsGeneric", out var isGeneric);
         var gitHead = context.AdditionalFiles.First(text => text.Path.EndsWith("git_head.txt")).GetText()?.ToString();
         var commitHash = context.AdditionalFiles.First(text => text.Path.EndsWith("git_commit_hash.txt")).GetText()?.ToString();
         var gitBranch = context.AdditionalFiles.First(text => text.Path.EndsWith("git_branch.txt")).GetText()?.ToString();
+
+        var code = Generator.CreateAndGenerateCode(
+            new GeneratorOptions
+            {
+                RootNamespace = rootNamespace,
+                ClassName = className,
+                //IsGeneric = Convert.ToBoolean(isGeneric)
+            },
+            new GitInfo
+            {
+                GitHead = gitHead!.Trim(Environment.NewLine.ToCharArray()),
+                CommitHash = commitHash!.Trim(Environment.NewLine.ToCharArray()),
+                GitBranch = gitBranch!.Trim(Environment.NewLine.ToCharArray()),
+            },
+            context);
+
         context.AddSource(
             "GitAssemblyInfo.g.cs",
             SourceText.From(
-                Generator.CreateAndGenerateCode(
-                    new GeneratorOptions
-                    {
-                        RootNamespace = rootNamespace,
-                        AssemblyType = assemblyType,
-                        IsGeneric = Convert.ToBoolean(isGeneric),
-                        IsCSharp10OrGreater = compilation.LanguageVersion is LanguageVersion.CSharp10
-                            or LanguageVersion.Latest
-                            or LanguageVersion.Preview,
-                    },
-                    new GitInfo
-                    {
-                        GitHead = gitHead!.Trim(Environment.NewLine.ToCharArray()),
-                        CommitHash = commitHash!.Trim(Environment.NewLine.ToCharArray()),
-                        GitBranch = gitBranch!.Trim(Environment.NewLine.ToCharArray()),
-                    },
-                    context),
+                code,
                 Encoding.UTF8));
     }
 }

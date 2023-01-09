@@ -74,16 +74,15 @@
     <!--
     Add the namespace for the generated attribute to the global usings list only if the C# language version is 10.0 or newer.
     -->
-    <Using Include="Elskom.Generic.Libs" Condition="'$(ImplicitUsings)' == 'enable'" />
+    
     <!--
     Add the root namespace to the global usings list only if the C# language version is 10.0 or newer.
 
     Also avoid trying to add Elskom.Generic.Libs twice when RootNamespace is that value.
     -->
-    <Using Include="$(RootNamespace)" Condition="'$(ImplicitUsings)' == 'enable' AND '$(RootNamespace)' != 'Elskom.Generic.Libs'" />
+    
     <CompilerVisibleProperty Include="RootNamespace" />
-    <CompilerVisibleProperty Include="GitBuildInfoAssemblyType" />
-    <CompilerVisibleProperty Include="GitBuildInfoIsGeneric" />
+    <CompilerVisibleProperty Include="GitBuildInfoClassName" />
     <AdditionalFiles Include="$(IntermediateOutputPath)\git_head.txt" />
     <AdditionalFiles Include="$(IntermediateOutputPath)\git_commit_hash.txt" />
     <AdditionalFiles Include="$(IntermediateOutputPath)\git_branch.txt" />

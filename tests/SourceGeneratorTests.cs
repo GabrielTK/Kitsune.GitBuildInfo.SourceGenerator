@@ -9,6 +9,7 @@ public class SourceGeneratorTests
     public async Task TestGeneratingDefaultNamespaceCSharp10()
     {
         await TestGeneratingDefaultNamespace(Microsoft.CodeAnalysis.CSharp.LanguageVersion.CSharp10).ConfigureAwait(false);
+        
     }
 
     [Fact]

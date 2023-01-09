@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <AdditionalFiles Remove="obj\Debug\netstandard2.0\\git_branch.txt" />
+    <AdditionalFiles Remove="obj\Debug\netstandard2.0\\git_commit_hash.txt" />
+    <AdditionalFiles Remove="obj\Debug\netstandard2.0\\git_head.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="..\..\build\GitBuildInfo.SourceGenerator.targets" />
+  </ItemGroup>
+</Project>

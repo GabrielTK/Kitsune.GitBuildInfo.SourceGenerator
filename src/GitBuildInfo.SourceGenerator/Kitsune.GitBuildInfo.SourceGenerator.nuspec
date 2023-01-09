@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Kitsune.GitBuildInfo.SourceGenerator</id>
+    <version>$version$</version>
+    <authors>Kitsune</authors>
+    <developmentDependency>true</developmentDependency>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <projectUrl>https://github.com/Elskom/GitBuildInfo.SourceGenerator</projectUrl>
+    <description>Source Generator for dumping the git branch information, commit hash, and if the working tree is dirty or clean on projects that install this and applies them as an assembly level attribute.</description>
+    <releaseNotes>$PackageReleaseNotes$</releaseNotes>
+    <copyright>Copyright (c) 2021</copyright>
+    <repository type="git" url="https://github.com/GabrielTK/GitBuildInfo.SourceGenerator.git" />
+    <dependencies>
+      <group targetFramework=".NETStandard2.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="$BaseOutputPath$**" target="analyzers\cs\" />
+    <file src="..\..\build\**" target="build\" />
+    <file src="..\..\tools\**" target="tools\" />
+  </files>
+</package>

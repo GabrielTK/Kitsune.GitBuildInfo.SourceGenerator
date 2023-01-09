@@ -13,6 +13,7 @@
     <Using Include="Microsoft.CodeAnalysis.Testing.Verifiers" />
     <Using Include="Microsoft.CodeAnalysis.VisualBasic" />
     <Using Include="Microsoft.CodeAnalysis.VisualBasic.Testing" />
+    <Using Include="Kitsune.GitBuildInfo.SourceGenerator" />
     <!-- Required xunit usings. -->
     <Using Include="Xunit" />
   </ItemGroup>

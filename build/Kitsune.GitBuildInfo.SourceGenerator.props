@@ -1,0 +1,7 @@
+<Project>
+
+  <PropertyGroup>
+    <GitBuildInfoIsGeneric Condition="'$(GitBuildInfoIsGeneric)' == ''">false</GitBuildInfoIsGeneric>
+  </PropertyGroup>
+
+</Project>

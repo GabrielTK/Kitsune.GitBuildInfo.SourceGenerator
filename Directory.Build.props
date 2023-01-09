@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <Company>Els_kom org.</Company>
-    <Authors>Els_kom org.</Authors>
+    <Company>Kitsune</Company>
+    <Authors>Kitsune, Els_kom org.</Authors>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/Elskom/GitBuildInfo.SourceGenerator/</RepositoryUrl>
     <PackageProjectUrl>https://github.com/Elskom/GitBuildInfo.SourceGenerator/</PackageProjectUrl>

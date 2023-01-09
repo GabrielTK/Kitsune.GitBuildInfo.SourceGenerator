@@ -1,1 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\src\GitBuildInfo.SourceGenerator\Kitsune.GitBuildInfo.SourceGenerator.csproj" ReferenceOutputAssembly="true"
+                      OutputItemType="Analyzer" />
+  </ItemGroup>
+	<PropertyGroup>
+		<RootNamespace>Git.BuildInfo</RootNamespace>
+		<GitBuildInfoClassName>GitBuildInfo</GitBuildInfoClassName>
+	</PropertyGroup>
+	<Import Project="..\build\Kitsune.GitBuildInfo.SourceGenerator.targets"></Import>
+</Project>
