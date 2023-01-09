@@ -85,7 +85,7 @@
 	    WriteOnlyWhenDifferent="true" />
     <WriteLinesToFile
 	    File="$(IntermediateOutputPath)\git_dirty.txt"
-	    Lines="Not a git clone or git is not in Path."
+	    Lines=""
 	    Condition="'$(GitDirtyFiles)' == ''"
 	    Overwrite="true"
 	    WriteOnlyWhenDifferent="true" />
